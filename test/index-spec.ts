@@ -1,17 +1,22 @@
 
 import * as chai from "chai";
+import {mkdirSync, writeFileSync} from "fs";
+import {resolve} from "path";
+import {sync as rmSync} from "rimraf";
 import EslintGitStatus from "../src/index";
 const expect = chai.expect;
 
 describe("index", () => {
   it("should provide Greeter", (done) => {
-    new EslintGitStatus("../canner-web/.eslintrc.js", "../canner-web", ".js").start()
+    rmSync(resolve(__dirname, "file"));
+    mkdirSync(resolve(__dirname, "file"));
+    writeFileSync(resolve(__dirname, "file/test.js"), "function test() { console.log('test'); }");
+    new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "../"), ".js").start()
       .then((result) => {
-        console.log(result);
-        done();
+        done("should lint fail");
       })
       .catch((err) => {
-        done(err);
+        done();
       });
   });
 });

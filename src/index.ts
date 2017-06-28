@@ -1,7 +1,8 @@
 import * as chalk from "chalk";
 import {spawn} from "child_process";
+import {statSync} from "fs";
 import GitStatusFilterFile, {IFileStatus} from "git-status-filter-file-extension";
-import {resolve} from "path";
+import {isAbsolute, resolve} from "path";
 
 const log = console.log;
 
@@ -16,12 +17,12 @@ export default class EslintGitStatus {
         const fileArr: string[] = [];
         files.forEach((file) => {
           if (file.isNew || file.isModified) {
-            fileArr.push(resolve(process.cwd(), this.gitDirPath, file.path()));
+            fileArr.push(resolve(__dirname, this.gitDirPath, file.path()));
           }
         });
 
-        const eslintConfig = resolve(process.cwd(), this.eslintPath);
-        const eslint = resolve(process.cwd(), this.gitDirPath, "./node_modules/.bin/eslint");
+        const eslintConfig = resolve(__dirname, this.eslintPath);
+        const eslint = resolve(__dirname, this.gitDirPath, "./node_modules/.bin/eslint");
 
         if (fileArr.length === 0) {
           return Promise.resolve("Nothing to lint");
@@ -33,12 +34,12 @@ export default class EslintGitStatus {
           // print pretty log
           const result = data.toString().split("\n");
           result.forEach((line, i) => {
-            if (i === 1) {
-              log(chalk.underline(result[1]));
-            } else if (i === 2) {
-              log(chalk.red(result[2]));
-            } else if (i === 4) {
-              log(chalk.bgRed(result[4]));
+            if (isAbsolute(line)) {
+              log(chalk.underline(line));
+            } else if (line.match(/^\s*\d\:\d/g)) {
+              log(chalk.red(line));
+            } else if (line.match(/^✖/g)) {
+              log(chalk.bgRed(line));
             } else {
               log(line);
             }
@@ -46,8 +47,7 @@ export default class EslintGitStatus {
         });
 
         lintCmd.stderr.on("data", (data) => {
-          const result = data as string;
-          console.log(`stderr: ${result.split("\n")}`);
+          console.log(`stderr: ${data.toString()}`);
         });
 
         return new Promise((resolve, reject) => {
