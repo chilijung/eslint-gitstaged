@@ -7,7 +7,7 @@ import {isAbsolute, resolve} from "path";
 const log = console.log;
 
 export default class EslintGitStatus {
-  constructor(readonly eslintPath: string, readonly gitDirPath: string, readonly ext: string) {
+  constructor(readonly eslintPath: string, readonly gitDirPath: string, readonly ext: (string | string[]) = "js") {
   }
 
   public start(): Promise<string> {
