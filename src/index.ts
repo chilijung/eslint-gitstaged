@@ -36,7 +36,7 @@ export default class EslintGitStatus {
           result.forEach((line, i) => {
             if (isAbsolute(line)) {
               log(chalk.underline(line));
-            } else if (line.match(/^\s*\d\:\d/g)) {
+            } else if (line.match(/^\s*\d*\:\d*/g)) {
               log(chalk.red(line));
             } else if (line.match(/^✖/g)) {
               log(chalk.bgRed(line));
