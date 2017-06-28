@@ -8,6 +8,14 @@ Using **current git status** to find out modfied and added files passing eslint,
 npm install eslint-gitstatus
 ```
 
+## API
+
+### EslintGitStatus(<eslintrc path>, <git repo path>, <extension name>)
+
+- eslintPath: path to your eslintrc file
+- git repo: path to your `.git`
+- extension `string | string[]`: which kind of extensions do you want to lint with eslint.
+
 ## Usage
 
 ```js
