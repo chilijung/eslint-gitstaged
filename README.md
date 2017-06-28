@@ -14,7 +14,7 @@ npm install eslint-gitstatus
 // EslintGitStatus(<eslintrc path>, <git repository path>, <extension default 'js'>)
 new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "../"), ".js").start()
       .then((result) => {
-        // done lint
+        // success no lint error, done lint
       })
       .catch((err) => {
         // err, when lint failed
