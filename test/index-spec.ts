@@ -13,9 +13,11 @@ describe("index", () => {
     writeFileSync(resolve(__dirname, "file/test.js"), "function test() { console.log('test'); }");
     new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "../"), ".js").start()
       .then((result) => {
+        rmSync(resolve(__dirname, "file"));
         done("should lint fail");
       })
       .catch((err) => {
+        rmSync(resolve(__dirname, "file"));
         done();
       });
   });
