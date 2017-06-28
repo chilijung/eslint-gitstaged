@@ -10,10 +10,10 @@ npm install eslint-gitstatus
 
 ## API
 
-### EslintGitStatus(<eslintrc path>, <git repo path>, <extension name>)
+### EslintGitStatus(eslintrcPath, gitPath, extension)
 
-- eslintPath: path to your eslintrc file
-- git repo: path to your `.git`
+- eslintrcPath: path to your eslintrc file
+- gitPath: path to your `.git`
 - extension `string | string[]`: which kind of extensions do you want to lint with eslint.
 
 ## Usage
