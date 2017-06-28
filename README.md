@@ -1,6 +1,6 @@
 # eslint-gitstatus
 
-Using **current git status** to find out which files should pass eslint. To prevent lint the whole repository again and again.  This is a nice package to use along with `git precommit`.
+Using **current git status** to find out modfied and added files passing eslint, to prevent lint the whole repository again and again.  This is a nice package to use along with `git precommit`.
 
 ## Install
 
