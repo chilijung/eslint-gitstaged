@@ -9,7 +9,8 @@
     ""
   ],
   "files": [
-    "lib"
+    "lib",
+		"bin"
   ],
   "bin": {
     "eslintgs": "./bin/eslintgs.js"
