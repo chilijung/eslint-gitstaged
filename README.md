@@ -8,6 +8,32 @@ Using **current git status** to find out modfied and added files passing eslint,
 npm install eslint-gitstatus
 ```
 
+## Command line usage
+
+Install global
+
+```
+npm i -g eslint-gitstatus
+```
+
+Usage
+
+```
+Usage: eslintgs [options] [command]
+
+  Commands:
+
+    help  Display help
+
+  Options:
+
+    -e, --eslint [value]  eslint.json file path (defaults to "./.eslintrc.json")
+    -E, --ext [value]     extension names, can use multiple extensions seperate with comma (defaults to "js,jsx")
+    -g, --git [value]     your git directory, where your .git exist (defaults to ".")
+    -h, --help            Output usage information
+    -v, --version         Output the version number
+```
+
 ## API
 
 ### EslintGitStatus(eslintrcPath, gitPath, extension)
@@ -28,6 +54,22 @@ new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "..
         // err, when lint failed
       });
 ```
+
+## Tslint users
+
+- https://github.com/Canner/tslint-gitstatus
+
+## Install troubleshooting
+
+If you can't install `nodegit` see link below.
+
+Mac:
+
+```
+sudo xcode-select --install
+```
+
+https://github.com/nodegit/nodegit/issues/1134
 
 ## License
 

@@ -1,6 +1,6 @@
 import * as chalk from "chalk";
-import {spawn} from "child_process";
-import {statSync} from "fs";
+import {ChildProcess, spawn} from "child_process";
+import {existsSync, statSync} from "fs";
 import GitStatusFilterFile, {IFileStatus} from "git-status-filter-file-extension";
 import {isAbsolute, resolve} from "path";
 
@@ -15,20 +15,28 @@ export default class EslintGitStatus {
     return gitStatusFiles.start()
       .then((files) => {
         const fileArr: string[] = [];
+        const eslintConfig = resolve(__dirname, this.eslintPath);
+        const eslint = resolve(__dirname, this.gitDirPath, "./node_modules/.bin/eslint");
         files.forEach((file) => {
           if (file.isNew || file.isModified) {
             fileArr.push(resolve(__dirname, this.gitDirPath, file.path()));
           }
         });
 
-        const eslintConfig = resolve(__dirname, this.eslintPath);
-        const eslint = resolve(__dirname, this.gitDirPath, "./node_modules/.bin/eslint");
-
         if (fileArr.length === 0) {
           return Promise.resolve("Nothing to lint");
         }
 
-        const lintCmd = spawn(eslint, ["-c", eslintConfig].concat(fileArr));
+        let lintCmd: ChildProcess;
+        if (existsSync(eslint)) { // tslint:disable-line
+          lintCmd = spawn(eslint, ["-c", eslintConfig].concat(fileArr));
+        } else {
+          lintCmd = spawn("eslint", ["-c", eslintConfig].concat(fileArr));
+        }
+
+        lintCmd.on("error", (err) => {
+          return Promise.reject(`Execute eslint failed: ${err}`);
+        });
 
         lintCmd.stdout.on("data", (data) => {
           // print pretty log
