@@ -7,7 +7,7 @@ import EslintGitStatus from "../src/index";
 const expect = chai.expect;
 
 describe("index", () => {
-  it("should provide Greeter", (done) => {
+  it("should provide use eslint settings and lint fail.", (done) => {
     rmSync(resolve(__dirname, "file"));
     mkdirSync(resolve(__dirname, "file"));
     writeFileSync(resolve(__dirname, "file/test.js"), "function test() { console.log('test'); }");
@@ -19,6 +19,22 @@ describe("index", () => {
       .catch((err) => {
         rmSync(resolve(__dirname, "file"));
         done();
+      });
+  });
+
+  it("should provide ignore lint test2.js file", (done) => {
+    rmSync(resolve(__dirname, "file"));
+    mkdirSync(resolve(__dirname, "file"));
+    writeFileSync(resolve(__dirname, "file/test2.js"), "function test() { console.log('test'); }");
+    new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "../"), ".js").start()
+      .then((result) => {
+        chai.expect(result).equals("Nothing to lint");
+        rmSync(resolve(__dirname, "file"));
+        done();
+      })
+      .catch((err) => {
+        rmSync(resolve(__dirname, "file"));
+        done("should lint nothing");
       });
   });
 });

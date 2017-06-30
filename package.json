@@ -31,7 +31,8 @@
     "@types/chalk": "^0.4.31",
     "args": "^3.0.2",
     "chalk": "^1.1.3",
-    "git-status-filter-file-extension": "^0.3.1"
+    "git-status-filter-file-extension": "^0.3.1",
+    "ignore": "^3.3.3"
   },
   "devDependencies": {
     "@types/chai": "^3.0.0",
