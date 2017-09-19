@@ -8,12 +8,6 @@ Using **current git status** to find out modfied and added files passing eslint,
 npm install eslint-gitstatus
 ```
 
-if you use yarn, make sure you have `BUILD_DEBUG=false` in command to build nodegit release version. (don't know why, yarn always build nodegit debug version.)
-
-```
-BUILD_DEBUG=false yarn
-```
-
 ## Command line usage
 
 Install global
@@ -64,18 +58,6 @@ new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "..
 ## Tslint users
 
 - https://github.com/Canner/tslint-gitstatus
-
-## Install troubleshooting
-
-If you can't install `nodegit` see link below.
-
-Mac:
-
-```
-sudo xcode-select --install
-```
-
-https://github.com/nodegit/nodegit/issues/1134
 
 ## License
 

@@ -40,8 +40,8 @@ export default class EslintGitStatus {
     return fileArr.filter(igFilter);
   }
 
-  public start(): Promise<string> {
-    const gitStatusFiles = new GitStatusFilterFile(this.gitDirPath, this.ext);
+  public start(): Promise<any> {
+    const gitStatusFiles = new GitStatusFilterFile(this.gitDirPath, {ext: this.ext});
     return gitStatusFiles.start()
       .then((files) => {
         const fileArr: string[] = [];
@@ -49,8 +49,8 @@ export default class EslintGitStatus {
         const eslintDir = dirname(eslintConfig);
         const eslint = resolve(__dirname, this.gitDirPath, "./node_modules/.bin/eslint");
         files.forEach((file) => {
-          if (file.isNew || file.isModified) {
-            fileArr.push(resolve(__dirname, this.gitDirPath, file.path()));
+          if (file.status === "A" || file.status === "M" || file.status === "C") {
+            fileArr.push(resolve(__dirname, this.gitDirPath, file.path));
           }
         });
         const filterFileArr = this.filterIgnoreFiles(eslintDir, fileArr);
@@ -89,12 +89,12 @@ export default class EslintGitStatus {
           console.log(`stderr: ${data.toString()}`);
         });
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolved, reject) => {
           lintCmd.on("close", (code) => {
             if (code === 1) {
               return reject("Lint fail");
             }
-            return resolve(code);
+            return resolved(code);
           });
         });
       });
