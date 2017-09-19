@@ -822,9 +822,9 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-status-filter-file-extension@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/git-status-filter-file-extension/-/git-status-filter-file-extension-1.0.1.tgz#00abc862a546bb3f70183b64befc44397db8f6b1"
+git-staged-filter-file-extension@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/git-staged-filter-file-extension/-/git-staged-filter-file-extension-1.0.2.tgz#0477d9ca4a1c060aa3a2ea97dd9eb55af8383279"
 
 glob-base@^0.3.0:
   version "0.3.0"

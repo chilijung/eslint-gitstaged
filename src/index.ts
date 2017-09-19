@@ -1,7 +1,7 @@
 import * as chalk from "chalk";
 import {ChildProcess, spawn} from "child_process";
 import {existsSync, readFileSync, statSync} from "fs";
-import GitStatusFilterFile, {IFileStatus} from "git-status-filter-file-extension";
+import GitStagedFilterFile, {IFileStatus} from "git-staged-filter-file-extension";
 import * as ignore from "ignore";
 import {dirname, isAbsolute, join, resolve} from "path";
 
@@ -11,7 +11,7 @@ const DEFAULT_IGNORE_DIRS = [
   "/bower_components/*",
 ];
 
-export default class EslintGitStatus {
+export default class EslintGitStaged {
   constructor(readonly eslintPath: string, readonly gitDirPath: string, readonly ext: (string | string[]) = "js") {
   }
 
@@ -41,8 +41,8 @@ export default class EslintGitStatus {
   }
 
   public start(): Promise<any> {
-    const gitStatusFiles = new GitStatusFilterFile(this.gitDirPath, {ext: this.ext});
-    return gitStatusFiles.start()
+    const gitStagedFiles = new GitStagedFilterFile(this.gitDirPath, {ext: this.ext});
+    return gitStagedFiles.start()
       .then((files) => {
         const fileArr: string[] = [];
         const eslintConfig = resolve(__dirname, this.eslintPath);

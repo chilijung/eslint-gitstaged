@@ -3,7 +3,7 @@
 const args = require('args');
 const {resolve} = require('path');
 const chalk = require('chalk');
-const EslintGitStatus = require('../lib/index').default;
+const EslintGitStaged = require('../lib/index').default;
 
 args
   .option('eslint', 'eslint.json file path', './.eslintrc.json')
@@ -12,7 +12,7 @@ args
 
 const flags = args.parse(process.argv);
 
-new EslintGitStatus(
+new EslintGitStaged(
   resolve(process.cwd(), flags.eslint),
   resolve(process.cwd(), flags.git),
   flags.ext.split(',').map(val => `.${val.trim()}`)

@@ -1,11 +1,11 @@
-# eslint-gitstatus
+# eslint-gitstaged
 
-Using **current git status** to find out modfied and added files passing eslint, to prevent lint the whole repository again and again.  This is a nice package to use along with `git precommit`.
+Using **current git staged files** to find out modfied and added files passing eslint, to prevent lint the whole repository again and again.  This is a nice package to use along with `git precommit`.
 
 ## Install
 
 ```
-npm install eslint-gitstatus
+npm install eslint-gitstaged
 ```
 
 ## Command line usage
@@ -13,7 +13,7 @@ npm install eslint-gitstatus
 Install global
 
 ```
-npm i -g eslint-gitstatus
+npm i -g eslint-gitstaged
 ```
 
 Usage
@@ -36,7 +36,7 @@ Usage: eslintgs [options] [command]
 
 ## API
 
-### EslintGitStatus(eslintrcPath, gitPath, extension)
+### EslintGitStaged(eslintrcPath, gitPath, extension)
 
 - eslintrcPath: path to your eslintrc file
 - gitPath: path to your `.git`
@@ -45,8 +45,8 @@ Usage: eslintgs [options] [command]
 ## Usage
 
 ```js
-// EslintGitStatus(<eslintrc path>, <git repository path>, <extension default 'js'>)
-new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "../"), ".js").start()
+// EslintGitStaged(<eslintrc path>, <git repository path>, <extension default 'js'>)
+new EslintGitStaged(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "../"), ".js").start()
       .then((result) => {
         // success no lint error, done lint
       })
@@ -57,7 +57,7 @@ new EslintGitStatus(resolve(__dirname, "./.eslintrc.js"), resolve(__dirname, "..
 
 ## Tslint users
 
-- https://github.com/Canner/tslint-gitstatus
+- https://github.com/Canner/tslint-gitstaged
 
 ## License
 
