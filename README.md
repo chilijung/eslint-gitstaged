@@ -1,5 +1,7 @@
 # eslint-gitstaged
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Canner/eslint-gitstaged.svg)](https://greenkeeper.io/)
+
 Using **current git staged files** to find out modfied and added files passing eslint, to prevent lint the whole repository again and again.  This is a nice package to use along with `git precommit`.
 
 ## Install
